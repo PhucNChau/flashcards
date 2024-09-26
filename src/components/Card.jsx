@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import './Card.css'
 import FrontCard from "./FrontCard";
 import BackCard from "./BackCard";
 
 const Card = (props) => {
-  var isFlip = false;
+  const [isFlip, setIsFlip] = useState(false);
+
+  const flipCard = () => {
+    setIsFlip(!isFlip);
+    console.log(isFlip);
+  }
 
   return (
     <div className="card">
-      <div className="card-inner">
+      <div className={`card-inner ${isFlip && 'flipped'}`}>
         {isFlip ? (
-          <BackCard />
+          <BackCard onClick={flipCard} />
         ) : (
-          <FrontCard />
+          <FrontCard onClick={flipCard} />
         )}
       </div>
     </div>
