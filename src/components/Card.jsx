@@ -1,16 +1,19 @@
 import React from "react";
 import './Card.css'
+import FrontCard from "./FrontCard";
+import BackCard from "./BackCard";
 
 const Card = (props) => {
+  var isFlip = false;
+
   return (
     <div className="card">
       <div className="card-inner">
-        <div className="card-front">
-          <p>Start!</p>
-        </div>
-        <div className="card-back">
-          <p>Press the next arrow to start the flashcards</p>
-        </div>
+        {isFlip ? (
+          <BackCard />
+        ) : (
+          <FrontCard />
+        )}
       </div>
     </div>
   )
