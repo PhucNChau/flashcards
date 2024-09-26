@@ -13,7 +13,7 @@ const Card = (props) => {
 
   return (
     <div className="card">
-      <div className={`card-inner ${isFlip && 'flipped'}`}>
+      <div className={`card-inner ${isFlip ? 'flipped' : ''}`}>
         {isFlip ? (
           <BackCard onClick={flipCard} />
         ) : (
