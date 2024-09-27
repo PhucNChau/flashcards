@@ -21,14 +21,15 @@ body {
   min-width: 320px;
   min-height: 100vh;
   box-sizing: border-box;
+  background-image: url(src/assets/background3.png);
+  background-repeat: no-repeat;
+  background-position: 0% 0%;
+  background-size: cover;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }

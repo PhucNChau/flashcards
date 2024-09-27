@@ -9,11 +9,30 @@
 .App {
   width: 100%;
 }
-
 .container {
   margin-top: 2.5em;
 }
-
 h3 {
   font-size: 1.3em;
+}
+.buttons {
+  margin-top: 2em;
+}
+.buttons button {
+  border: none;
+  border-radius: 5px;
+  background-color: #333333;
+  color: white;
+  width: 70px;
+  height: 55px;
+  font-size: 26px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.buttons button:last-child {
+  margin-right: 0px;
+}
+.buttons .hide {
+  background-color: gainsboro;
+  cursor: auto;
 }
