@@ -1,5 +1,5 @@
 #root {
-  width: 60%;
+  width: 80%;
   max-width: 1280px;
   margin: auto 0;
   padding: 2rem;
@@ -15,8 +15,41 @@
 h3 {
   font-size: 1.3em;
 }
+.userGuess {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 1em;
+  background-color: rgba(51, 51, 51, 0.8);
+  padding: 1em 0;
+  border-radius: 5px;
+}
+.userGuess label {
+  font-size: 20px;
+  color: #fff;
+}
+.userGuess input {
+  border: none;
+  padding: 0 9px;
+  border-radius: 5px;
+  cursor: context-menu;
+}
+input.correct {
+  background-color: #4db770;
+}
+input.wrong {
+  background-color: #dd591c;
+}
+.userGuess button {
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 9px;
+  cursor: pointer;
+}
 .buttons {
-  margin-top: 2em;
+  margin-top: 1.5em;
 }
 .buttons button {
   border: none;

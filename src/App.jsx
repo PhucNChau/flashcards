@@ -19,7 +19,7 @@ function App() {
     {
       id: 3,
       question: "Which gas do plants absorb from the atmosphere during photosynthesis?",
-      answer: "Carbon dioxide",
+      answer: "Carbon dioxide or CO2",
       difficulty: "Easy"
     },
     {
@@ -70,6 +70,8 @@ function App() {
   const [quizBundle, setQuizBundle] = useState(null);
   const [deletedList, setDeletedList] = useState([]);
   const [isNew, setIsNew] = useState(false);
+  const [guess, setGuess] = useState("");
+  const [correctGuess, setCorrectGuess] = useState("")
 
   const popQuiz = () => {
     var index = Math.floor(Math.random() * quizList.length);
@@ -77,6 +79,8 @@ function App() {
     setDeletedList(deletedList => [...deletedList, quizList[index]]);
     setQuizList(quizList.filter(i => i.id !== quizList[index].id));
     setIsNew(true);
+    setGuess("");
+    setCorrectGuess("");
   }
 
   const pushQuiz = () => {
@@ -84,6 +88,8 @@ function App() {
     setQuizBundle(deletedList[deletedList.length-1]);
     setQuizList(quizList => [...quizList, oldQuiz]);
     setIsNew(true);
+    setGuess("");
+    setCorrectGuess("");
   }
 
   const resetQuiz = () => {
@@ -91,6 +97,18 @@ function App() {
     setQuizList(defaultQuizList);
     setDeletedList([]);
     setIsNew(true);
+    setGuess("");
+    setCorrectGuess("");
+  }
+
+  const checkAnswer = () => {
+    if (guess.length > 0) {
+      if (quizBundle.answer.toLowerCase().indexOf(guess.toLowerCase()) !== -1) {
+        setCorrectGuess("correct")
+      } else {
+        setCorrectGuess("wrong")
+      }
+    }
   }
 
   return (
@@ -102,6 +120,11 @@ function App() {
       </div>
       <div className='container'>
         <Card quizBundle={quizBundle} new={isNew} />
+        <div className='userGuess'>
+          <label>Guess the answer here:</label>
+          <input type="text" value={guess} name='guess' onChange={(e) => setGuess(e.target.value)} className={correctGuess} />
+          <button onClick={checkAnswer}>Submit Guess</button>
+        </div>
         <div className='buttons'>
           <button className={`${(quizBundle === null || deletedList.length < 2) ? 'hide' : ''}`} disabled={quizBundle === null || deletedList.length < 2} onClick={pushQuiz}>&#8592;</button>
           <button className={`${quizBundle === null ? 'hide' : ''}`} disabled={quizBundle === null} onClick={resetQuiz}>&#8634;</button>
