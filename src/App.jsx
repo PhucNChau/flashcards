@@ -71,7 +71,10 @@ function App() {
   const [deletedList, setDeletedList] = useState([]);
   const [isNew, setIsNew] = useState(false);
   const [guess, setGuess] = useState("");
-  const [correctGuess, setCorrectGuess] = useState("")
+  const [correctGuess, setCorrectGuess] = useState("");
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [longestStreak, setLongestStreak] = useState(0);
+  const [questionChanged, setQuestionChanged] = useState(false);
 
   const popQuiz = () => {
     var index = Math.floor(Math.random() * quizList.length);
@@ -81,6 +84,7 @@ function App() {
     setIsNew(true);
     setGuess("");
     setCorrectGuess("");
+    setQuestionChanged(true);
   }
 
   const pushQuiz = () => {
@@ -90,6 +94,7 @@ function App() {
     setIsNew(true);
     setGuess("");
     setCorrectGuess("");
+    setQuestionChanged(true);
   }
 
   const resetQuiz = () => {
@@ -99,14 +104,23 @@ function App() {
     setIsNew(true);
     setGuess("");
     setCorrectGuess("");
+    setCurrentStreak(0);
+    setQuestionChanged(true);
   }
 
   const checkAnswer = () => {
     if (guess.length > 0) {
       if (quizBundle.answer.toLowerCase().indexOf(guess.toLowerCase()) !== -1) {
-        setCorrectGuess("correct")
+        setCorrectGuess("correct");
+        if (questionChanged) {
+          setCurrentStreak(currentStreak + 1);
+          setQuestionChanged(false);
+        }
       } else {
-        setCorrectGuess("wrong")
+        setCorrectGuess("wrong");
+        var maxStreak = currentStreak > longestStreak ? currentStreak : longestStreak;
+        setLongestStreak(maxStreak);
+        setCurrentStreak(0);
       }
     }
   }
@@ -117,6 +131,7 @@ function App() {
         <h1>Welcome to the Science Quiz!</h1>
         <h3>Are you ready to challenge your knowledge of the world around you? Whether you're a science enthusiast or just curious about how things work, this quiz is for you! 🌍✨</h3>
         <h3>Number of cards left: {quizList.length}</h3>
+        <h3>Current Streak: {currentStreak}, Longest Streak: {longestStreak > 0 ? longestStreak : ""}</h3>
       </div>
       <div className='container'>
         <Card quizBundle={quizBundle} new={isNew} />
